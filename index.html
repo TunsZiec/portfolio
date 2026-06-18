@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Nguyen Tuan Viet Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            background: #000;
+            overflow: hidden;
+            font-family: Consolas, monospace;
+            color: #ddd
+        }
+
+        .hero {
+            height: 100vh;
+            position: relative;
+            overflow: hidden
+        }
+
+        .grid {
+            position: absolute;
+            inset: -30%;
+            background-image: linear-gradient(rgba(0, 255, 255, .22) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 255, .22) 1px, transparent 1px);
+            background-size: 70px 70px;
+            transform: perspective(1000px) rotateX(80deg) scale(2);
+            animation: gridMove 6s linear infinite
+        }
+
+        .bg {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle, #202020 0%, #080808 45%, #000 80%)
+        }
+
+        .wrap {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 2200px
+        }
+
+        .monitor {
+            width: min(1100px, 94vw);
+            height: min(700px, 88vh);
+            background: #2f2f2f;
+            border-radius: 42px;
+            padding: 28px;
+            box-shadow: 0 50px 120px rgba(0, 0, 0, .9), inset 0 0 40px #000;
+            transform: rotateX(4deg) rotateY(-4deg);
+            transition: transform .08s linear
+        }
+
+        .screen {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: 28px;
+            overflow: hidden;
+            background: #050505
+        }
+
+        .screen:before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(to bottom, rgba(255, 255, 255, .05) 0px, rgba(255, 255, 255, .05) 1px, transparent 2px, transparent 4px);
+            pointer-events: none
+        }
+
+        .screen:after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle, transparent 55%, rgba(0, 0, 0, .45));
+            pointer-events: none
+        }
+
+        .layout {
+            display: flex;
+            height: 100%
+        }
+
+        .menu {
+            width: 260px;
+            border-right: 1px solid #333;
+            padding: 20px
+        }
+
+        .menu div {
+            padding: 12px;
+            cursor: pointer
+        }
+
+        .menu div:hover,
+        .active {
+            color: #fff;
+            text-shadow: 0 0 10px #fff;
+            transform: translateX(10px)
+        }
+
+        .content {
+            flex: 1;
+            padding: 20px;
+            overflow: auto
+        }
+
+        .card {
+            border: 1px solid #444;
+            padding: 12px;
+            margin: 12px 0;
+            background: #111
+        }
+
+        img {
+            width: 100%;
+            border: 1px solid #333
+        }
+
+        a {
+            color: #7fdcff
+        }
+
+        .vhs {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            opacity: .08;
+            background: linear-gradient(transparent, rgba(255, 255, 255, .2), transparent);
+            animation: vhs 6s infinite
+        }
+
+        @keyframes gridMove {
+            from {
+                background-position: 0 0
+            }
+
+            to {
+                background-position: 0 500px
+            }
+        }
+
+        @keyframes vhs {
+            96% {
+                transform: translateX(-8px)
+            }
+
+            97% {
+                transform: translateX(8px)
+            }
+        }
+
+        .glitch {
+            position: relative;
+            display: inline-block;
+            font-size: 92px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: #fff;
+            text-transform: uppercase;
+            animation: glitchMain 2s infinite steps(1)
+        }
+
+        .glitch:before,
+        .glitch:after {
+            content: attr(data-text);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            overflow: hidden
+        }
+
+        .glitch:before {
+            color: #00eaff;
+            transform: translate(-4px, 0);
+            mix-blend-mode: screen;
+            animation: glitchA 1.7s infinite
+        }
+
+        .glitch:after {
+            color: #ff2f6d;
+            transform: translate(4px, 0);
+            mix-blend-mode: screen;
+            animation: glitchB 1.3s infinite
+        }
+
+        .heroTitle {
+            padding: 40px 10px 10px;
+            text-align: center
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 28px;
+            color: #ddd;
+            margin: 18px 0 30px
+        }
+
+        .home-actions {
+            display: flex;
+            gap: 24px;
+            justify-content: center
+        }
+
+        .home-actions a {
+            display: inline-block;
+            padding: 18px 46px;
+            border: 1px solid rgba(80, 240, 255, .8);
+            text-decoration: none;
+            box-shadow: 0 0 25px rgba(0, 220, 255, .25);
+            color: #e6ffff
+        }
+
+        .home-actions a:last-child {
+            border-color: #ff4a6e;
+            color: #ff9ab0
+        }
+
+        .card.large {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 28px;
+            background: rgba(10, 10, 10, .75)
+        }
+
+        @keyframes glitchA {
+
+            0%,
+            100% {
+                clip-path: inset(0 0 0 0)
+            }
+
+            20% {
+                clip-path: inset(20% 0 45% 0);
+                transform: translate(-8px, 2px)
+            }
+
+            40% {
+                clip-path: inset(70% 0 5% 0)
+            }
+
+            60% {
+                clip-path: inset(40% 0 30% 0);
+                transform: translate(6px, -2px)
+            }
+        }
+
+        @keyframes glitchB {
+
+            0%,
+            100% {
+                clip-path: inset(0)
+            }
+
+            30% {
+                clip-path: inset(10% 0 60% 0);
+                transform: translate(8px, -1px)
+            }
+
+            65% {
+                clip-path: inset(60% 0 10% 0)
+            }
+        }
+
+        @keyframes glitchMain {
+            94% {
+                transform: translateX(0)
+            }
+
+            95% {
+                transform: translateX(-4px)
+            }
+
+            96% {
+                transform: translateX(4px)
+            }
+
+            97% {
+                transform: translateX(-8px)
+            }
+
+            98% {
+                transform: translateX(0)
+            }
+        }
+
+        @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
+        body,
+        * {
+            font-family: "Press Start 2P", monospace !important
+        }
+
+        .boot {
+            position: fixed;
+            inset: 0;
+            background: #000;
+            color: #7ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            animation: boot 3.2s forwards
+        }
+
+        .boot pre {
+            line-height: 2;
+            font-size: 18px
+        }
+
+        @keyframes boot {
+
+            0%,
+            85% {
+                opacity: 1
+            }
+
+            100% {
+                opacity: 0;
+                visibility: hidden
+            }
+        }
+
+        .glitch {
+            font-size: 120px;
+            animation: hardglitch 1.2s infinite alternate;
+            filter: contrast(120%);
+            text-shadow: 0 0 8px #00cfff
+        }
+
+        .glitch:before {
+            animation: vhsA .25s infinite
+        }
+
+        .glitch:after {
+            animation: vhsB 1.4s infinite;
+            color: #009dff
+        }
+
+        @keyframes hardglitch {
+            0% {
+                transform: translate(0)
+            }
+
+            20% {
+                transform: translate(-2px, 1px)
+            }
+
+            40% {
+                transform: translate(3px, -1px)
+            }
+
+            70% {
+                transform: translate(-2px)
+            }
+
+            100% {
+                transform: translate(0)
+            }
+        }
+
+        @keyframes vhsA {
+            0% {
+                clip-path: inset(0)
+            }
+
+            25% {
+                clip-path: inset(10% 0 50% 0)
+            }
+
+            50% {
+                clip-path: inset(60% 0 10% 0)
+            }
+
+            100% {
+                clip-path: inset(0)
+            }
+        }
+
+        @keyframes vhsB {
+            0% {
+                clip-path: inset(20% 0 20% 0)
+            }
+
+            50% {
+                clip-path: inset(65% 0 5% 0);
+                transform: translate(5px)
+            }
+
+            100% {
+                clip-path: inset(0)
+            }
+        }
+
+        .toggle-btn {
+            display: block;
+            margin: 20px auto;
+            padding: 12px 24px;
+            background: #08151a;
+            border: 1px solid #00cfff;
+            color: #00eaff;
+            cursor: pointer
+        }
+
+        .about-content {
+            display: none;
+            animation: fadeIn .4s ease
+        }
+
+        .about-content.show {
+            display: block
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="boot">
+        <pre>BOOTING CRT SYSTEM...
+CHECKING MEMORY... OK
+LOADING ASSETS... OK
+INITIALIZING INTERFACE...
+> WELCOME.</pre>
+    </div>
+    <div class="hero">
+        <div class="bg"></div>
+        <div class="grid"></div>
+        <div class="wrap">
+            <div class="monitor" id="monitor">
+                <div class="screen">
+                    <div class="vhs"></div>
+                    <div class="layout">
+                        <div class="menu">
+                            <div class="active" data-page="home">> THÔNG TIN</div>
+                            <div data-page="projects">DỰ ÁN</div>
+                            <div data-page="gallery">BỘ SƯU TẬP</div>
+                            <div data-page="links">LINKS</div>
+                            <div data-page="contact">LIÊN HỆ</div>
+                        </div>
+                        <div class="content" id="content"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const pages = {
+            home: `<div class='heroTitle'><h1 class='glitch' data-text='PORTFOLIO'>PORTFOLIO</h1><div class='subtitle'>Nguyễn Tuấn Việt</div><div class='card large'><h2>3D Character & Prop Artist</h2><br><p>Sống trong thế giới thực, nhưng tư duy theo hệ trục XYZ.</p><button class='toggle-btn' onclick='toggleAbout()'>ABOUT ME</button><div id='aboutContent' class='about-content'>
+<br>
+<div style='width:360px;height:360px;margin:0 auto 24px auto'>
+<img src='images/2.png' alt='Profile Photo' style='width:100%;height:100%;object-fit:cover;border:3px solid #00cfff;border-radius:0;box-shadow:0 0 15px #00cfff'>
+</div>
+<h3>GIỚI THIỆU</h3><br><p>Tôi là 3D Character & Prop Artist với niềm đam mê xây dựng nhân vật, đạo cụ và thế giới game giàu tính kể chuyện. Yêu thích phong cách Low Poly, Stylized và môi trường tương tác.</p><br><h3>KỸ NĂNG</h3><br><p>• ZBrush<br>• Maya 3D<br>• Blender<br>• Substance Painter<br>• Photoshop<br>• Unity</p><br><h3>KINH NGHIỆM</h3><br><p>4 Năm tham gia phát triển nhân vật, đạo cụ và môi trường cho các dự án game indie, tập trung vào tối ưu hóa asset và pipeline sản xuất.</p><br><div class='home-actions'><a href='cv.pdf' target='_blank'>TẢI CV</a></div></div></div></div>`,
+            projects: `<h1>Dự án tôi đã tham gia</h1><div class='card'><img src='images/Jam2.jpeg'><h3>WHB WALL-E (Gamedev.js Jam 2026)</h3></div><div class='card'><img src='images/Jam1.png'><h3>EXIMA (Global Game Jam Việt Nam 2026)</h3></div><div class='card'><img src='images/BBG.png'><h3>BonBonGame (Đa dạng hóa trải nghiệm trong một thể thống nhất)</h3></div>`,
+            gallery: `<h1>Những gì tôi đã làm</h1><img src='images/2'><br><br><img src='images/2'>`,
+            links: `<h1>Link tới những sản phẩm của tôi</h1><div class='card'><a target='_blank' href='https://sketchfab.com/casdanhsonglaox'>Sketchfab</a></div><div class='card'><a target='_blank' href='https://caideogico.itch.io/'>itch.io</a></div>`,
+            contact: `<h1>Liên hệ với tôi</h1><div class='card'>Email: vietnt100502@gmail.com</div><div class='card'>Discord: cadanhonglao_</div>`
+        };
+        content.innerHTML = pages.home;
+        document.querySelectorAll('.menu div').forEach(el => el.onclick = () => {
+            document.querySelectorAll('.menu div').forEach(x => x.classList.remove('active'));
+            el.classList.add('active');
+            content.innerHTML = pages[el.dataset.page];
+        });
+        const monitor = document.getElementById('monitor');
+        document.addEventListener('mousemove', e => {
+            let x = e.clientX / window.innerWidth - .5;
+            let y = e.clientY / window.innerHeight - .5;
+            monitor.style.transform = `rotateX(${4 - y * 10}deg) rotateY(${-4 + x * 14}deg)`;
+        });
+
+        function toggleAbout() {
+            const el = document.getElementById('aboutContent');
+            if (el) el.classList.toggle('show');
+        }
+    </script>
+
+</body>
+
+</html>
