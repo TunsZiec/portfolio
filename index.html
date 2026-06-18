@@ -429,18 +429,41 @@
                 opacity: 1
             }
         }
-    </style>
+    
+.boot{
+animation:boot 6.7s forwards!important;
+flex-direction:column;
+}
+.boot::before{
+content:"";
+position:absolute;
+inset:0;
+background:repeating-linear-gradient(to bottom,rgba(255,255,255,.04) 0px,rgba(255,255,255,.04) 2px,transparent 3px,transparent 5px);
+pointer-events:none;
+animation:flicker .15s infinite;
+}
+.boot-content{max-width:900px;text-align:left;color:#7ff}
+.boot-text{font-size:24px;line-height:1.8;white-space:pre-wrap;min-height:240px}
+.progress-wrap{width:100%;border:2px solid #7ff;height:30px;margin-top:20px}
+.progress-bar{height:100%;width:0;background:#7ff;box-shadow:0 0 20px #7ff}
+.welcome-big{font-size:72px;text-align:center;margin-top:30px;text-shadow:0 0 25px #7ff;opacity:0}
+@keyframes flicker{
+0%,100%{opacity:.95}
+50%{opacity:.8}
+}
+
+</style>
 </head>
 
 <body>
     <div class="boot">
-        <pre>BOOTING CRT SYSTEM...
-CHECKING MEMORY... OK
-LOADING ASSETS... OK
-INITIALIZING INTERFACE...
-> WELCOME.</pre>
-    </div>
-    <div class="hero">
+<div class="boot-content">
+<div id="bootText" class="boot-text"></div>
+<div class="progress-wrap"><div id="progressBar" class="progress-bar"></div></div>
+<div id="welcome" class="welcome-big">CHÀO MỪNG!</div>
+</div>
+</div>
+<div class="hero">
         <div class="bg"></div>
         <div class="grid"></div>
         <div class="wrap">
@@ -466,11 +489,11 @@ INITIALIZING INTERFACE...
             home: `<div class='heroTitle'><h1 class='glitch' data-text='PORTFOLIO'>PORTFOLIO</h1><div class='subtitle'>Nguyễn Tuấn Việt</div><div class='card large'><h2>3D Character & Prop Artist</h2><br><p>Sống trong thế giới thực, nhưng tư duy theo hệ trục XYZ.</p><button class='toggle-btn' onclick='toggleAbout()'>ABOUT ME</button><div id='aboutContent' class='about-content'>
 <br>
 <div style='width:360px;height:360px;margin:0 auto 24px auto'>
-<img src='images/2.png' alt='Profile Photo' style='width:100%;height:100%;object-fit:cover;border:3px solid #00cfff;border-radius:0;box-shadow:0 0 15px #00cfff'>
+<img src='images/VietNT.png' alt='Profile Photo' style='width:100%;height:100%;object-fit:cover;border:3px solid #00cfff;border-radius:0;box-shadow:0 0 15px #00cfff'>
 </div>
-<h3>GIỚI THIỆU</h3><br><p>Tôi là 3D Character & Prop Artist với niềm đam mê xây dựng nhân vật, đạo cụ và thế giới game giàu tính kể chuyện. Yêu thích phong cách Low Poly, Stylized và môi trường tương tác.</p><br><h3>KỸ NĂNG</h3><br><p>• ZBrush<br>• Maya 3D<br>• Blender<br>• Substance Painter<br>• Photoshop<br>• Unity</p><br><h3>KINH NGHIỆM</h3><br><p>4 Năm tham gia phát triển nhân vật, đạo cụ và môi trường cho các dự án game indie, tập trung vào tối ưu hóa asset và pipeline sản xuất.</p><br><div class='home-actions'><a href='cv.pdf' target='_blank'>TẢI CV</a></div></div></div></div>`,
+<h3>GIỚI THIỆU</h3><br><p>Tôi là 3D Character & Prop Artist với niềm đam mê xây dựng nhân vật, đạo cụ và thế giới game giàu tính kể chuyện. Yêu thích phong cách Low Poly, Stylized và môi trường tương tác.</p><br><h3>KỸ NĂNG</h3><br><p>• ZBrush<br>• Maya 3D<br>• Blender<br>• Substance Painter<br>• Photoshop<br>• Unity</p><br><h3>KINH NGHIỆM</h3><br><p>4 Năm tham gia phát triển nhân vật, đạo cụ và môi trường cho các dự án game indie, tập trung vào tối ưu hóa asset và pipeline sản xuất.</p><br><div class='home-actions'><a href='images/CV_VietNT.pdf' target='_blank'>TẢI CV</a></div></div></div></div>`,
             projects: `<h1>Dự án tôi đã tham gia</h1><div class='card'><img src='images/Jam2.jpeg'><h3>WHB WALL-E (Gamedev.js Jam 2026)</h3></div><div class='card'><img src='images/Jam1.png'><h3>EXIMA (Global Game Jam Việt Nam 2026)</h3></div><div class='card'><img src='images/BBG.png'><h3>BonBonGame (Đa dạng hóa trải nghiệm trong một thể thống nhất)</h3></div>`,
-            gallery: `<h1>Những gì tôi đã làm</h1><img src='images/2'><br><br><img src='images/2'>`,
+            gallery: `<h1>Những gì tôi đã làm</h1><img src='images/3D1.png'><br><br><img src='images/Anim3D.png'><br><br><img src='images/3D2.png'><br><br><img src='images/Anim2D.png'><br><br><img src='images/3D3.png'><br><br><img src='images/3D4.png'>`,
             links: `<h1>Link tới những sản phẩm của tôi</h1><div class='card'><a target='_blank' href='https://sketchfab.com/casdanhsonglaox'>Sketchfab</a></div><div class='card'><a target='_blank' href='https://caideogico.itch.io/'>itch.io</a></div>`,
             contact: `<h1>Liên hệ với tôi</h1><div class='card'>Email: vietnt100502@gmail.com</div><div class='card'>Discord: cadanhonglao_</div>`
         };
@@ -492,6 +515,46 @@ INITIALIZING INTERFACE...
             if (el) el.classList.toggle('show');
         }
     </script>
+
+
+<script>
+const bootLines=[
+"KHỞI ĐỘNG HỆ THỐNG ...",
+"KIỂM TRA BỘ NHỚ ........ OK",
+"ĐANG TẢI TÀI NGUYÊN .... OK",
+"KHỞI TẠO GIAO DIỆN ..... OK",
+"TRUY CẬP HỒ SƠ NGƯỜI DÙNG",
+""
+];
+const bt=document.getElementById('bootText');
+const pb=document.getElementById('progressBar');
+const welcome=document.getElementById('welcome');
+let text="",i=0,j=0,progress=0;
+function typeLine(){
+ if(i>=bootLines.length){
+   let p=setInterval(()=>{
+      progress+=3;
+      pb.style.width=progress+'%';
+      if(progress>=100){
+        clearInterval(p);
+        welcome.style.opacity=1;
+      }
+   },40);
+   return;
+ }
+ let line=bootLines[i];
+ if(j<line.length){
+   text+=line[j++];
+   bt.textContent=text+"▌";
+   setTimeout(typeLine,20);
+ }else{
+   text+="\n";
+   i++; j=0;
+   setTimeout(typeLine,180);
+ }
+}
+typeLine();
+</script>
 
 </body>
 
